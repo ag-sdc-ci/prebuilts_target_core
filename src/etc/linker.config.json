@@ -1,0 +1,41 @@
+{
+	"provideLibs": [	
+		    "libdl-x86_64-v2.so",
+		    "libdl.so",
+		    "libdummy_binary_libcutils-sockets.a-x86_64-v2.so",
+		    "libdummy_binary_libcutils-sockets.a.so",
+		    "libdummy_binary_libcutils-x86_64-v2.so.so",
+		    "libdummy_binary_libcutils.a-x86_64-v2.so",
+		    "libdummy_binary_libcutils.a.so",
+		    "libdummy_binary_libcutils.so.so",
+		    "libdummy_binary_libpackagelistparser-x86_64-v2.so.so",
+		    "libdummy_binary_libpackagelistparser.a-x86_64-v2.so",
+		    "libdummy_binary_libpackagelistparser.a.so",
+		    "libdummy_binary_libpackagelistparser.so.so",
+		    "libdummy_binary_libsparse-x86_64-v2.so.so",
+		    "libdummy_binary_libsparse.a-x86_64-v2.so",
+		    "libdummy_binary_libsparse.a.so",
+		    "libdummy_binary_libsparse.so.so",
+		    "libdummy_binary_libsync-x86_64-v2.so.so",
+		    "libdummy_binary_libsync.a-x86_64-v2.so",
+		    "libdummy_binary_libsync.a.so",
+		    "libdummy_binary_libsync.so.so",
+		    "libdummy_binary_libvndksupport-x86_64-v2.so.so",
+		    "libdummy_binary_libvndksupport.a-x86_64-v2.so",
+		    "libdummy_binary_libvndksupport.a.so",
+		    "libdummy_binary_libvndksupport.so.so",
+		    "libdummy_ext_core-x86_64-v2.so",
+		    "libdummy_ext_core.so",
+		    "libdummy_headers_ext_core-x86_64-v2.so",
+		    "libdummy_headers_ext_core.so"
+	],
+	"requireLibs": [	
+		    "libbase.so",
+		    "libc++_shared.so",
+		    "libc.so",
+		    "liblog.so",
+		    "libm.so",
+		    "libz.so"
+	],
+	"visible": true
+}
