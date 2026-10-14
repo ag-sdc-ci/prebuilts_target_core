@@ -1,0 +1,162 @@
+// Auto-generated prebuilt Blueprint for system/core
+// Extracted from Extractive APEX package: org.blisslabs.ag.ext.core
+
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+// -----------------------------------------------------------------------------
+// Headers
+// -----------------------------------------------------------------------------
+cc_library_headers {
+    name: "libcutils_headers",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["include"],
+    system_shared_libs: [],
+    stl: "none",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    min_sdk_version: "29",
+}
+
+cc_library_headers {
+    name: "libutils_headers",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["include"],
+    system_shared_libs: [],
+    stl: "none",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    min_sdk_version: "29",
+}
+
+cc_library_headers {
+    name: "libprocessgroup_headers",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    export_include_dirs: ["include"],
+    system_shared_libs: [],
+    stl: "none",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    min_sdk_version: "29",
+}
+
+cc_library_headers {
+    name: "libsystem_headers",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["include"],
+    system_shared_libs: [],
+    stl: "none",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    min_sdk_version: "29",
+}
+
+// -----------------------------------------------------------------------------
+// Shared Libraries
+// -----------------------------------------------------------------------------
+cc_prebuilt_library {
+    name: "libcutils",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    check_elf_files: false,
+    export_include_dirs: ["include"],
+    shared: {
+        srcs: ["lib/libcutils.so"],
+    },
+    static: {
+        srcs: ["lib/libcutils.a"],
+    },
+    prefer: true,
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    min_sdk_version: "29",
+}
+
+cc_prebuilt_library {
+    name: "libsync",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    check_elf_files: false,
+    export_include_dirs: ["include"],
+    shared: {
+        srcs: ["lib/libsync.so"],
+    },
+    static: {
+        srcs: ["lib/libsync.a"],
+    },
+    prefer: true,
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    min_sdk_version: "29",
+}
+
+cc_prebuilt_library {
+    name: "libsparse",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    check_elf_files: false,
+    export_include_dirs: ["include"],
+    shared: {
+        srcs: ["lib/libsparse.so"],
+    },
+    static: {
+        srcs: ["lib/libsparse.a"],
+    },
+    prefer: true,
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    min_sdk_version: "29",
+}
+
+cc_prebuilt_library {
+    name: "libvndksupport",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    check_elf_files: false,
+    export_include_dirs: ["include"],
+    shared: {
+        srcs: ["lib/libvndksupport.so"],
+    },
+    static: {
+        srcs: ["lib/libvndksupport.a"],
+    },
+    prefer: true,
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    min_sdk_version: "29",
+}
