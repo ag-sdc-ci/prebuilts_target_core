@@ -765,6 +765,9 @@ cc_defaults {
     "libboot_control_client",
     ],
 }
+cc_defaults {
+    name: "libutils_binder_impl_defaults_nodeps",
+}
 
 cc_defaults {
     name: "libutils_binder_impl_defaults",
