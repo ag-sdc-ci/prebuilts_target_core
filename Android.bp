@@ -969,3 +969,11 @@ cc_defaults {
     fuzz_on_haiku_host: false,
     },
 }
+
+cc_prebuilt_binary {
+    name: "init_first_stage.microdroid",
+    stem: "init_first_stage.microdroid",
+    srcs: ["src/lib/_libdummy.so"],
+    check_elf_files: false,
+    prefer: true,
+}
