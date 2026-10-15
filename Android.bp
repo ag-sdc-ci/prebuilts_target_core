@@ -240,6 +240,25 @@ cc_prebuilt_library {
     },
 }
 
+cc_prebuilt_library_shared {
+    name: "libtombstoned_client",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    check_elf_files: false,
+    export_include_dirs: [
+        "src/include",
+    ],
+    prefer: true,
+    apex_available: [
+        "//apex_available:anyapex",
+        "//apex_available:platform",
+    ],
+    min_sdk_version: "29",
+    srcs: ["src/lib/libcutils.so"],
+}
+
 cc_prebuilt_library_static {
     name: "libcutils_sockets",
     vendor_available: true,
