@@ -1150,6 +1150,15 @@ cc_library_host_static {
     export_include_dirs: ["src/include"],
 }
 
+cc_library {
+    name: "libasyncio",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+
 
 
 
