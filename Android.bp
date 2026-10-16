@@ -1111,5 +1111,30 @@ cc_library {
     export_include_dirs: ["src/include"],
 }
 
+cc_library {
+    name: "libprocessgroup",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "libcgrouprc",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "libcgrouprc_format",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+
 
 
