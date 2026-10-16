@@ -1064,3 +1064,27 @@ cc_library_headers {
     min_sdk_version: "29",
 }
 
+cc_library {
+    name: "libvbmeta",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
+}
+
+cc_library {
+    name: "libcrypto_utils",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "liblp",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+
