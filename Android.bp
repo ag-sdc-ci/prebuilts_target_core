@@ -1135,6 +1135,22 @@ cc_library {
     export_include_dirs: ["src/include"],
 }
 
+cc_library_host_static {
+    name: "libinit_host",
+}
+
+genrule {
+    name: "generated_stub_builtin_function_map",
+    out: ["builtin_function_map.h"],
+    cmd: "touch $(out)",
+}
+
+cc_library_host_static {
+    name: "libdiagnose_usb",
+    export_include_dirs: ["src/include"],
+}
+
+
 
 
 
