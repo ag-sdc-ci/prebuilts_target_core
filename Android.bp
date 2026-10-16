@@ -1087,4 +1087,29 @@ cc_library {
     export_include_dirs: ["src/include"],
 }
 
+cc_library {
+    name: "libpropertyinfoserializer",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "libpropertyinfoparser",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "libutilscallstack",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+
 
