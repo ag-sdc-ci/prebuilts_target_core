@@ -240,6 +240,73 @@ cc_prebuilt_library {
     },
 }
 
+cc_prebuilt_library {
+    name: "libutils",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    check_elf_files: false,
+    export_include_dirs: [
+        "src/include",
+    ],
+    prefer: true,
+    apex_available: [
+        "//apex_available:anyapex",
+        "//apex_available:platform",
+    ],
+    min_sdk_version: "29",
+    shared: {
+        srcs: ["src/lib/libutils.so"],
+    },
+    static: {
+        srcs: ["src/lib/libutils.a"],
+    },
+}
+
+cc_prebuilt_library {
+    name: "libusbhost",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    check_elf_files: false,
+    export_include_dirs: [
+        "src/include",
+    ],
+    prefer: true,
+    apex_available: [
+        "//apex_available:anyapex",
+        "//apex_available:platform",
+    ],
+    min_sdk_version: "29",
+    shared: {
+        srcs: ["src/lib/libusbhost.so"],
+    },
+    static: {
+        srcs: ["src/lib/libusbhost.a"],
+    },
+}
+
+cc_prebuilt_library_shared {
+    name: "libutils_binder_sdk",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    check_elf_files: false,
+    export_include_dirs: [
+        "src/include",
+    ],
+    prefer: true,
+    apex_available: [
+        "//apex_available:anyapex",
+        "//apex_available:platform",
+    ],
+    min_sdk_version: "29",
+    srcs: ["src/lib/libutils_binder_sdk.so"],
+}
+
 cc_prebuilt_library_shared {
     name: "libtombstoned_client",
     vendor_available: true,
