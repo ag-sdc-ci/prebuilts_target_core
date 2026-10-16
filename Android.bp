@@ -1158,6 +1158,15 @@ cc_library {
     export_include_dirs: ["src/include"],
 }
 
+cc_binary_host {
+    name: "img2simg",
+}
+
+cc_binary_host {
+    name: "simg2img",
+}
+
+
 
 
 
