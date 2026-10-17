@@ -1365,3 +1365,19 @@ cc_library {
     host_supported: true,
     export_include_dirs: ["src/include"],
 }
+
+cc_library_static {
+    name: "libbatterymonitor",
+    vendor_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "libdebuggerd_client",
+    defaults: ["debuggerd_defaults"],
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
