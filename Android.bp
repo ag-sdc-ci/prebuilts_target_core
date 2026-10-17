@@ -1554,3 +1554,82 @@ cc_library_static {
     vendor_ramdisk_available: true,
     export_include_dirs: ["src/include"],
 }
+
+cc_binary_host {
+    name: "mkbootfs",
+}
+
+cc_binary_host {
+    name: "append2simg",
+}
+
+cc_binary {
+    name: "host_init_verifier",
+    host_supported: true,
+}
+
+cc_binary {
+    name: "reboot",
+    recovery_available: true,
+}
+
+cc_binary {
+    name: "remount",
+    recovery_available: true,
+}
+
+cc_binary {
+    name: "toolbox",
+    recovery_available: true,
+    vendor_ramdisk_available: true,
+}
+
+cc_binary {
+    name: "storaged",
+}
+
+prebuilt_etc {
+    name: "code_coverage.policy",
+    sub_dir: "seccomp_policy",
+    filename_from_src: true,
+    arch: {
+        arm: {
+            src: "src/seccomp_policy/code_coverage.arm.policy",
+        },
+        arm64: {
+            src: "src/seccomp_policy/code_coverage.arm64.policy",
+        },
+        riscv64: {
+            src: "src/seccomp_policy/code_coverage.riscv64.policy",
+        },
+        x86: {
+            src: "src/seccomp_policy/code_coverage.x86.policy",
+        },
+        x86_64: {
+            src: "src/seccomp_policy/code_coverage.x86_64.policy",
+        },
+    },
+}
+
+prebuilt_etc {
+    name: "crash_dump.policy",
+    sub_dir: "seccomp_policy",
+    filename_from_src: true,
+    arch: {
+        arm: {
+            src: "src/seccomp_policy/crash_dump.arm.policy",
+        },
+        arm64: {
+            src: "src/seccomp_policy/crash_dump.arm64.policy",
+        },
+        riscv64: {
+            src: "src/seccomp_policy/crash_dump.riscv64.policy",
+        },
+        x86: {
+            src: "src/seccomp_policy/crash_dump.x86.policy",
+        },
+        x86_64: {
+            src: "src/seccomp_policy/crash_dump.x86_64.policy",
+        },
+    },
+}
