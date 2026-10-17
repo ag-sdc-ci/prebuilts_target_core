@@ -1163,8 +1163,11 @@ genrule {
     cmd: "touch $(out)",
 }
 
-cc_library_host_static {
+cc_library_static {
     name: "libdiagnose_usb",
+    host_supported: true,
+    vendor_available: true,
+    recovery_available: true,
     export_include_dirs: ["src/include"],
 }
 
@@ -1309,7 +1312,7 @@ cc_library {
     export_include_dirs: ["src/include"],
 }
 
-cc_library_static {
+cc_library {
     name: "libfs_mgr",
     vendor_available: true,
     ramdisk_available: true,
@@ -1323,4 +1326,42 @@ cc_library_static {
         "//apex_available:platform",
     ],
     min_sdk_version: "31",
+}
+
+cc_library_static {
+    name: "libdebuggerd_handler",
+    defaults: ["debuggerd_defaults"],
+    recovery_available: true,
+    vendor_ramdisk_available: true,
+    export_include_dirs: ["src/include"],
+    apex_available: [
+        "com.android.runtime",
+        "//apex_available:platform",
+    ],
+}
+
+cc_library {
+    name: "libkeyutils",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libmini_keyctl_static",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "libsysutils",
+    vendor_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
 }
