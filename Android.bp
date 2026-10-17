@@ -1448,3 +1448,109 @@ cc_library_static {
     defaults: ["fs_mgr_defaults"],
     export_include_dirs: ["src/include"],
 }
+
+cc_library {
+    name: "libgrallocusage",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.media.swcodec",
+    ],
+    min_sdk_version: "29",
+}
+
+cc_library_shared {
+    name: "libappfuse",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    defaults: ["libappfuse_defaults"],
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "libexpresslog",
+    vendor_available: true,
+    product_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "libstatspush_compat",
+    vendor_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+    apex_available: ["com.android.resolv"],
+    min_sdk_version: "29",
+}
+
+cc_library {
+    name: "libsuspend",
+    vendor_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libstoraged",
+    vendor_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libcharger_sysprop",
+    vendor_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libhealthd_draw",
+    vendor_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libhealthd_charger",
+    vendor_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libhealthd_charger_nops",
+    vendor_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libhealthd_charger_ui",
+    vendor_available: true,
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libtombstoned_client_static",
+    recovery_available: true,
+    vendor_ramdisk_available: true,
+    export_include_dirs: ["src/include"],
+}
