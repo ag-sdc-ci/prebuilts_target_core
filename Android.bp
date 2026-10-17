@@ -1381,3 +1381,82 @@ cc_library {
     host_supported: true,
     export_include_dirs: ["src/include"],
 }
+
+cc_library {
+    name: "libfs_mgr_binder",
+    vendor_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+    recovery_available: true,
+    host_supported: true,
+    defaults: ["fs_mgr_defaults"],
+    export_include_dirs: ["src/include"],
+    apex_available: [
+        "//apex_available:anyapex",
+        "//apex_available:platform",
+    ],
+    min_sdk_version: "31",
+}
+
+cc_library_static {
+    name: "libsnapshot_static",
+    vendor_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+    recovery_available: true,
+    host_supported: true,
+    defaults: [
+        "libsnapshot_defaults",
+        "libsnapshot_hal_deps",
+    ],
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "libsnapshot",
+    vendor_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+    recovery_available: true,
+    host_supported: true,
+    defaults: [
+        "libsnapshot_defaults",
+        "libsnapshot_cow_defaults",
+        "libsnapshot_hal_deps",
+    ],
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libsnapshot_nobinder",
+    vendor_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+    recovery_available: true,
+    host_supported: true,
+    defaults: [
+        "libsnapshot_defaults",
+        "libsnapshot_hal_deps",
+    ],
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libsnapuserd_client",
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+    recovery_available: true,
+    host_supported: true,
+    defaults: ["fs_mgr_defaults"],
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libfs_avb",
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+    recovery_available: true,
+    host_supported: true,
+    defaults: ["fs_mgr_defaults"],
+    export_include_dirs: ["src/include"],
+}
