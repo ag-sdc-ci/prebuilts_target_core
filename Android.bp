@@ -25,6 +25,8 @@ cc_library_headers {
     vendor_available: true,
     product_available: true,
     recovery_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
     host_supported: true,
     apex_available: [
         "//apex_available:anyapex",
@@ -283,6 +285,8 @@ cc_prebuilt_library {
     vendor_available: true,
     product_available: true,
     recovery_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
     host_supported: true,
     check_elf_files: false,
     export_include_dirs: [
@@ -1099,8 +1103,22 @@ cc_library {
     name: "libpropertyinfoparser",
     host_supported: true,
     vendor_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
     recovery_available: true,
+    native_bridge_supported: true,
+    stl: "none",
+    target: {
+        bionic: {
+            system_shared_libs: [],
+            header_libs: ["libc_headers"],
+        },
+    },
     export_include_dirs: ["src/include"],
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.runtime",
+    ],
 }
 
 cc_library {
@@ -1166,9 +1184,143 @@ cc_binary_host {
     name: "simg2img",
 }
 
+cc_library_static {
+    name: "libsnapshot_cow",
+    defaults: [
+        "libsnapshot_cow_defaults",
+    ],
+    host_supported: true,
+    recovery_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+}
+
+cc_binary_host {
+    name: "fastboot",
+}
+
+genrule {
+    name: "toolbox_input_labels",
+    tool_files: ["generate-input.h-labels.py"],
+    cmd: "$(location) $(in) >$(out)",
+    srcs: [":kernel_input_headers"],
+    out: ["input.h-labels.h"],
+}
+
+rust_bindgen {
+    name: "libstatspull_bindgen",
+    wrapper_src: "statslog.h",
+    crate_name: "statspull_bindgen",
+    source_stem: "bindings",
+    bindgen_flags: [
+        "--allowlist-function=AStatsEventList_addStatsEvent",
+        "--allowlist-function=AStatsEvent_.*",
+        "--allowlist-function=AStatsManager_.*",
+        "--allowlist-var=AStatsManager_.*",
+    ],
+    target: {
+        android: {
+            shared_libs: [
+                "libstatspull",
+                "libstatssocket",
+            ],
+        },
+    },
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.resolv",
+        "com.android.virt",
+    ],
+    min_sdk_version: "apex_inherit",
+}
+
+cc_library_static {
+    name: "libfstab",
+    vendor_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+    recovery_available: true,
+    host_supported: true,
+    defaults: ["fs_mgr_defaults"],
+    export_include_dirs: ["src/include"],
+    apex_available: [
+        "//apex_available:anyapex",
+        "//apex_available:platform",
+    ],
+    min_sdk_version: "31",
+}
+
+cc_library_static {
+    name: "libdm",
+    defaults: ["fs_mgr_defaults"],
+    recovery_available: true,
+    host_supported: true,
+    export_include_dirs: ["src/include"],
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+}
 
 
 
 
 
 
+
+
+cc_library_static {
+    name: "libstatssocket_lazy",
+    header_libs: [
+        "libstatssocket_headers",
+    ],
+    export_header_lib_headers: [
+        "libstatssocket_headers",
+    ],
+    apex_available: ["//apex_available:platform"],
+}
+
+cc_library_static {
+    name: "libstatspull_lazy",
+    header_libs: [
+        "libstatspull_headers",
+        "libstatssocket_headers",
+    ],
+    export_header_lib_headers: [
+        "libstatspull_headers",
+    ],
+    apex_available: ["//apex_available:platform"],
+}
+
+cc_library_static {
+    name: "libdebuggerd_handler_fallback",
+    visibility: ["//bionic/linker"],
+    apex_available: [
+        "com.android.runtime",
+        "//apex_available:platform",
+    ],
+    defaults: ["debuggerd_defaults"],
+    recovery_available: true,
+    vendor_ramdisk_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library {
+    name: "libnetutils",
+    vendor_available: true,
+    export_include_dirs: ["src/include"],
+}
+
+cc_library_static {
+    name: "libfs_mgr",
+    vendor_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+    recovery_available: true,
+    host_supported: true,
+    defaults: ["fs_mgr_defaults"],
+    export_include_dirs: ["src/include"],
+    apex_available: [
+        "//apex_available:anyapex",
+        "//apex_available:platform",
+    ],
+    min_sdk_version: "31",
+}
