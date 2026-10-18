@@ -1600,6 +1600,7 @@ cc_binary {
 // consumer is the bionic apex com.android.runtime (binaries list).
 cc_binary {
     name: "crash_dump",
+    compile_multilib: "both",
     apex_available: [
         "com.android.runtime",
     ],
