@@ -350,6 +350,10 @@ cc_prebuilt_library {
         "//apex_available:platform",
     ],
     min_sdk_version: "29",
+    stubs: {
+        symbol_file: "libvndksupport.map.txt",
+        versions: ["29"],
+    },
     shared: {
         srcs: ["src/lib/libvndksupport.so"],
     },
@@ -1151,6 +1155,10 @@ cc_library {
     vendor_available: true,
     recovery_available: true,
     export_include_dirs: ["src/include"],
+    stubs: {
+        symbol_file: "libcgrouprc.map.txt",
+        versions: ["29"],
+    },
 }
 
 cc_library {
