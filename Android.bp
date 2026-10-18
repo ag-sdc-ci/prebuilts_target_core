@@ -1596,6 +1596,16 @@ cc_binary {
     name: "storaged",
 }
 
+// crash_dump (system/core/debuggerd) is shadowed out of the framework-only tree;
+// consumer is the bionic apex com.android.runtime (binaries list).
+cc_binary {
+    name: "crash_dump",
+    apex_available: [
+        "com.android.runtime",
+    ],
+    required: ["crash_dump.policy"],
+}
+
 prebuilt_etc {
     name: "code_coverage.policy",
     sub_dir: "seccomp_policy",
