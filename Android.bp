@@ -28,6 +28,12 @@ cc_library_headers {
     ramdisk_available: true,
     vendor_ramdisk_available: true,
     host_supported: true,
+    min_sdk_version: "29",
+    target: {
+        windows: {
+            enabled: true,
+        },
+    },
     apex_available: [
         "//apex_available:anyapex",
         "//apex_available:platform",
@@ -35,6 +41,11 @@ cc_library_headers {
     export_include_dirs: [
         "src/include",
     ],
+}
+
+filegroup {
+    name: "android_filesystem_config_header",
+    srcs: ["src/include/private/android_filesystem_config.h"],
 }
 
 cc_library_headers {
@@ -45,7 +56,6 @@ cc_library_headers {
     host_supported: true,
     apex_available: [
         "com.android.runtime",
-        "com.android.virt",
         "//apex_available:platform",
     ],
     export_include_dirs: [
@@ -149,6 +159,7 @@ cc_library_headers {
     product_available: true,
     recovery_available: true,
     host_supported: true,
+    min_sdk_version: "29",
     apex_available: [
         "//apex_available:platform",
         "//apex_available:anyapex",
@@ -164,6 +175,7 @@ cc_library_headers {
     product_available: true,
     recovery_available: true,
     host_supported: true,
+    min_sdk_version: "29",
     apex_available: [
         "//apex_available:platform",
         "//apex_available:anyapex",
@@ -226,6 +238,11 @@ cc_prebuilt_library {
     ramdisk_available: true,
     vendor_ramdisk_available: true,
     host_supported: true,
+    target: {
+        windows: {
+            enabled: true,
+        },
+    },
     check_elf_files: false,
     export_include_dirs: [
         "src/include",
@@ -263,7 +280,7 @@ cc_prebuilt_library_shared {
     srcs: ["src/lib/libcutils.so"],
 }
 
-cc_prebuilt_library_static {
+cc_prebuilt_library {
     name: "libcutils_sockets",
     vendor_available: true,
     product_available: true,
@@ -279,7 +296,9 @@ cc_prebuilt_library_static {
         "//apex_available:platform",
     ],
     min_sdk_version: "29",
-    srcs: ["src/lib/libcutils_sockets.a"],
+    static: {
+        srcs: ["src/lib/libcutils_sockets.a"],
+    },
 }
 
 cc_prebuilt_library {
@@ -323,7 +342,6 @@ cc_prebuilt_library {
     prefer: true,
     apex_available: [
         "//apex_available:platform",
-        "com.android.virt",
     ],
     min_sdk_version: "29",
     shared: {
@@ -362,24 +380,6 @@ cc_prebuilt_library {
     },
 }
 
-cc_prebuilt_library_shared {
-    name: "libdl",
-    vendor_available: true,
-    product_available: true,
-    recovery_available: true,
-    host_supported: true,
-    check_elf_files: false,
-    export_include_dirs: [
-        "src/include",
-    ],
-    prefer: true,
-    apex_available: [
-        "//apex_available:anyapex",
-        "//apex_available:platform",
-    ],
-    min_sdk_version: "29",
-    srcs: ["src/lib/libdl_android.so"],
-}
 
 cc_prebuilt_library {
     name: "libsync",
@@ -468,7 +468,7 @@ cc_defaults {
     "-fno-finite-loops",
     "-DANDROID_DEBUGGABLE=0",
     ],
-    local_include_dirs: ["include"],
+    local_include_dirs: ["src/include"],
     product_variables: {
     debuggable: {
     cflags: [
@@ -562,7 +562,7 @@ cc_defaults {
 
 cc_defaults {
     name: "libappfuse_defaults",
-    local_include_dirs: ["include"],
+    local_include_dirs: ["src/include"],
     shared_libs: ["libbase"],
     cflags: [
     "-Wall",
@@ -584,7 +584,7 @@ cc_defaults {
     cflags: ["-Wall", "-Werror"],
     vendor_available: true,
     recovery_available: true,
-    export_include_dirs: ["include"],
+    export_include_dirs: ["src/include"],
     shared_libs: [
     "libutils",
     "libbase",
@@ -711,29 +711,43 @@ cc_defaults {
     ],
 }
 
-cc_defaults {
+soong_config_module_type {
+    name: "snapshot_cow_cc_defaults",
+    module_type: "cc_defaults",
+    config_namespace: "ANDROID",
+    bool_variables: ["framework_only"],
+    properties: ["header_libs"],
+}
+
+snapshot_cow_cc_defaults {
     name: "libsnapshot_cow_defaults",
     defaults: [
-    "fs_mgr_defaults",
+        "fs_mgr_defaults",
     ],
     cflags: [
-    "-D_FILE_OFFSET_BITS=64",
-    "-Wall",
-    "-Werror",
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-Werror",
     ],
     shared_libs: [
-    "libbase",
-    "liblog",
+        "libbase",
+        "liblog",
     ],
     static_libs: [
-    "libbrotli",
-    "libz",
-    "liblz4",
-    "libzstd",
+        "libz",
+        "liblz4",
+        "libzstd",
     ],
-    header_libs: [
-    "libupdate_engine_headers",
-    ],
+    soong_config_variables: {
+        framework_only: {
+            header_libs: [],
+            conditions_default: {
+                header_libs: [
+                    "libupdate_engine_headers",
+                ],
+            },
+        },
+    },
 }
 
 cc_defaults {
@@ -751,13 +765,11 @@ cc_defaults {
     "liblog",
     ],
     static_libs: [
-    "libbrotli",
     "libdm",
     "libfstab",
     "update_metadata-protos",
     ],
     whole_static_libs: [
-    "libbrotli",
     "libcutils",
     "libext2_uuid",
     "libext4_utils",
@@ -776,7 +788,7 @@ cc_defaults {
     export_header_lib_headers: [
     "libfiemap_headers",
     ],
-    export_include_dirs: ["include"],
+    export_include_dirs: ["src/include"],
     proto: {
     type: "lite",
     export_proto_headers: true,
@@ -999,6 +1011,11 @@ cc_prebuilt_library {
     product_available: true,
     recovery_available: true,
     host_supported: true,
+    target: {
+        windows: {
+            enabled: true,
+        },
+    },
     check_elf_files: false,
     export_include_dirs: [
         "src/include",
@@ -1121,7 +1138,6 @@ cc_library {
     target: {
         bionic: {
             system_shared_libs: [],
-            header_libs: ["libc_headers"],
         },
     },
     export_include_dirs: ["src/include"],
@@ -1146,7 +1162,13 @@ cc_library {
     host_supported: true,
     vendor_available: true,
     recovery_available: true,
+    double_loadable: true,
     export_include_dirs: ["src/include"],
+    min_sdk_version: "29",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
 }
 
 cc_library {
@@ -1154,7 +1176,13 @@ cc_library {
     host_supported: true,
     vendor_available: true,
     recovery_available: true,
+    double_loadable: true,
     export_include_dirs: ["src/include"],
+    min_sdk_version: "29",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
     stubs: {
         symbol_file: "libcgrouprc.map.txt",
         versions: ["29"],
@@ -1167,6 +1195,11 @@ cc_library {
     vendor_available: true,
     recovery_available: true,
     export_include_dirs: ["src/include"],
+    min_sdk_version: "29",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
 }
 
 cc_library_host_static {
@@ -1228,6 +1261,7 @@ genrule {
 
 rust_bindgen {
     name: "libstatspull_bindgen",
+    visibility: ["//frameworks/proto_logging/stats/stats_log_api_gen"],
     wrapper_src: "statslog.h",
     crate_name: "statspull_bindgen",
     source_stem: "bindings",
@@ -1248,7 +1282,6 @@ rust_bindgen {
     apex_available: [
         "//apex_available:platform",
         "com.android.resolv",
-        "com.android.virt",
     ],
     min_sdk_version: "apex_inherit",
 }
@@ -1380,6 +1413,12 @@ cc_library {
     recovery_available: true,
     host_supported: true,
     export_include_dirs: ["src/include"],
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+        "com.android.os.statsd",
+    ],
+    min_sdk_version: "29",
 }
 
 cc_library_static {
@@ -1414,6 +1453,7 @@ cc_library {
     min_sdk_version: "31",
 }
 
+/*
 cc_library_static {
     name: "libsnapshot_static",
     recovery_available: true,
@@ -1444,6 +1484,7 @@ cc_library_static {
     ],
     export_include_dirs: ["src/include"],
 }
+*/
 
 cc_library_static {
     name: "libsnapuserd_client",
@@ -1609,6 +1650,14 @@ cc_binary {
 cc_binary {
     name: "crash_dump",
     compile_multilib: "both",
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+        lib64: {
+            suffix: "64",
+        },
+    },
     apex_available: [
         "com.android.runtime",
     ],
