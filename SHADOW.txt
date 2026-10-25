@@ -1,6 +1,10 @@
 shadow prebuilt repo: core (target, extractive payload, prefixes as-built upstream)
   upstream: system/core
-  api-level: 34 (local ag-build rebuild 2026-10-11, branch 34-20261011)
-  blobs: org.blisslabs.ag.ext.core.apex 
+  api-level: 34 (local ag-build rebuild 2026-10-25, branch 34-20261025)
+  blobs: org.blisslabs.ag.ext.core.apex
   src: extracted base payload + regenerated root Android.bp (gen_extractive_bp.py)
-  date: 2026-10-11
+  recipe: ag-ci/system_core@363af53 (stage init sysprop api dumps for com.android.sysprop.init)
+  date: 2026-10-25
+  note: added init/sysprop/api/com.android.sysprop.init-{current,latest}.txt — soong
+        check_api (build action) fails on sysprop_library com.android.sysprop.init when
+        the api dumps are absent; dumps sourced from pinned lineage-21.0 via recipe.
