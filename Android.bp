@@ -1627,18 +1627,14 @@ cc_binary {
 
 cc_binary {
     name: "reboot",
-    recovery_available: true,
 }
 
 cc_binary {
     name: "remount",
-    recovery_available: true,
 }
 
 cc_binary {
     name: "toolbox",
-    recovery_available: true,
-    vendor_ramdisk_available: true,
 }
 
 cc_binary {
